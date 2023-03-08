@@ -10,6 +10,7 @@ import (
 //
 // This object contains a single user identifier provided as part of extended identifiers.
 // The exchange should ensure that business agreements allow for the sending of this data.
+
 type UserAgent struct {
 
 	// Attribute:
@@ -42,7 +43,7 @@ type UserAgent struct {
 	//   optimized for small screens or touch input. 0 if the agent prefers the “desktop”
 	//   or “full” content. Implementers should derive this value from the Sec-CH-UA-
 	//   Mobile header.
-	Mobile *int8 `json:"mobile,omitempty"`
+	Mobile *int8 `json:"mobile,omitempty" validate:"omitempty,oneof=0 1"`
 
 	// Attribute:
 	//   architecture

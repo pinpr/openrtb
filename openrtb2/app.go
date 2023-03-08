@@ -11,22 +11,22 @@ import (
 // This object should be included if the ad supported content is a non-browser application (typically in mobile) as opposed to a website.
 // A bid request with an app object must not contain a site or DOOH object.
 // At a minimum, it is useful to provide an App ID or bundle, but this is not strictly required.
-type App struct {
 
+type App struct {
 	// Attribute:
 	//   id
 	// Type:
 	//   string; recommended
 	// Description:
-	//   Exchange-specific app ID.
-	ID string `json:"id,omitempty"`
+	//   Exchange-specific app ID (Set it with MD5 hashed Project ID)
+	ID string `json:"id,omitempty" validate:"omitempty,md5"`
 
 	// Attribute:
 	//   name
 	// Type:
 	//   string
 	// Description:
-	//   App name (may be aliased at the publisher’s request).
+	//   App name (maybe aliased at the publisher’s request).
 	Name string `json:"name,omitempty"`
 
 	// Attribute:
@@ -37,8 +37,8 @@ type App struct {
 	//   The store ID of the app in an app store. See OTT/CTV Store
 	//   Assigned App Identification Guidelines for more details about
 	//   expected strings for CTV app stores. For mobile apps in
-	//   Google Play Store, these should be bundle or package names
-	//   (e.g. com.foo.mygame). For apps in Apple App Store, these
+	//   Google Play Store, these should be a bundle or package name
+	//   (e.g. com.foo.game). For apps in Apple App Store, these
 	//   should be a numeric ID.
 	Bundle string `json:"bundle,omitempty"`
 
@@ -47,7 +47,7 @@ type App struct {
 	// Type:
 	//   string
 	// Description:
-	//   Domain of the app (e.g., “mygame.foo.com”).
+	//   Domain of the app (e.g., “game.foo.com”).
 	Domain string `json:"domain,omitempty"`
 
 	// Attribute:
@@ -56,14 +56,14 @@ type App struct {
 	//   string
 	// Description:
 	//   App store URL for an installed app; for IQG 2.1 compliance.
-	StoreURL string `json:"storeurl,omitempty"`
+	StoreURL string `json:"storeurl,omitempty" validate:"omitempty,url"`
 
 	// Attribute:
 	//   cattax
 	// Type:
 	//   integer; default 1
 	// Description:
-	//   The taxonomy in use. Refer to the AdCOM list List: Category
+	//   The taxonomy in use. Refer to the AdCOM list: Category
 	//   Taxonomies for values.
 	CatTax adcom1.CategoryTaxonomy `json:"cattax,omitempty"`
 
@@ -111,7 +111,7 @@ type App struct {
 	//   integer
 	// Description:
 	//   Indicates if the app has a privacy policy, where 0 = no, 1 = yes.
-	PrivacyPolicy int8 `json:"privacypolicy,omitempty"`
+	PrivacyPolicy *int8 `json:"privacypolicy,omitempty" validate:"omitempty,oneof=0 1"`
 
 	// Attribute:
 	//   paid
@@ -119,7 +119,7 @@ type App struct {
 	//   integer
 	// Description:
 	//   0 = app is free, 1 = the app is a paid version.
-	Paid int8 `json:"paid,omitempty"`
+	Paid *int8 `json:"paid,omitempty" validate:"omitempty,oneof=0 1"`
 
 	// Attribute:
 	//   publisher
@@ -177,4 +177,14 @@ type App struct {
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
 	Ext json.RawMessage `json:"ext,omitempty"`
+
+	AppExtension
+}
+
+type AppExtension struct {
+	// The advertising SDK name
+	SDKName string `json:"sdkname,omitempty"`
+
+	// The advertising SDK version number which should follow the semantic versioning
+	SDKVersion string `json:"sdkverion,omitempty" validate:"omitempty,semver"`
 }

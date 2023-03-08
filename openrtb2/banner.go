@@ -124,7 +124,7 @@ type Banner struct {
 	// Description:
 	//   Indicates if the banner is in the top frame as opposed to an
 	//   iframe, where 0 = no, 1 = yes.
-	TopFrame int8 `json:"topframe,omitempty"`
+	TopFrame *int8 `json:"topframe,omitempty"`
 
 	// Attribute:
 	//   expdir
@@ -170,7 +170,7 @@ type Banner struct {
 	//   (Section 3.2.7) in an array of companion ads. Indicates the
 	//   companion banner rendering mode relative to the associated
 	//   video, where 0 = concurrent, 1 = end-card.
-	VCm int8 `json:"vcm,omitempty"`
+	VCm *int8 `json:"vcm,omitempty"`
 
 	// Attribute:
 	//   ext

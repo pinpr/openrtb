@@ -1,0 +1,42 @@
+### Intellij IDEA ###
+.idea/*
+.idea/codeStyles
+.idea/runConfigurations
+.idea/watcherTasks.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/*.iml
+cmake-build-*/
+out/
+.idea_modules/
+*.iws
+*.iml
+
+### VisualStudioCode ###
+.vscode/*
+.vscode/settings.json.default
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/*.code-snippets
+.history/
+.history
+.ionide
+*.code-workspace
+
+### Go ###
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.pem
+*.pub
+go.work
+go.work.sum
+/vendor/
+/Godeps/
+tmp/
+.DS_Store

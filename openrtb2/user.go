@@ -7,6 +7,7 @@ import "encoding/json"
 // This object contains information known or derived about the human user of the device (i.e., the audience for advertising).
 // The user id is an exchange artifact and may be subject to rotation or other privacy policies.
 // However, this user ID must be stable long enough to serve reasonably as the basis for frequency capping and retargeting.
+
 type User struct {
 
 	// Attribute:
@@ -14,9 +15,9 @@ type User struct {
 	// Type:
 	//   string; recommended
 	// Description:
-	//   Exchange-specific ID for the user. At least one of id or
-	//   buyeruid is recommended.
-	ID string `json:"id,omitempty"`
+	//   Exchange-specific ID for the user (Set with MD5 hashed installation ID or customer ID)
+	//   At least one of id or buyeruid is recommended.
+	ID string `json:"id,omitempty" validate:"omitempty,md5"`
 
 	// Attribute:
 	//   buyeruid
@@ -42,7 +43,7 @@ type User struct {
 	// Description:
 	//   Gender, where “M” = male, “F” = female, “O” = known to be
 	//   other (i.e., omitted is unknown).
-	Gender string `json:"gender,omitempty"`
+	Gender string `json:"gender,omitempty" validate:"omitempty,oneof=M F O"`
 
 	// Attribute:
 	//   keywords

@@ -17,7 +17,7 @@ type SupplyChain struct {
 	//   Flag indicating whether the chain contains all nodes involved
 	//   in the transaction leading back to the owner of the site, app
 	//   or other medium of the inventory, where 0 = no, 1 = yes.
-	Complete int8 `json:"complete"`
+	Complete *int8 `json:"complete"`
 
 	// Attribute:
 	//   nodes

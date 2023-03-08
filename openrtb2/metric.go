@@ -1,12 +1,16 @@
 package openrtb2
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"github.com/pinpr/backend-shared-kit/vld"
+)
 
 // 3.2.5 Object: Metric
 //
 // This object is associated with an impression as an array of metrics.
 // These metrics can offer insight into the impression to assist with decisioning such as average recent viewability, click-through rate, etc.
 // Each metric is identified by its type, reports the value of the metric, and optionally identifies the source or vendor measuring the value.
+
 type Metric struct {
 
 	// Attribute:
@@ -16,7 +20,7 @@ type Metric struct {
 	// Description:
 	//   Type of metric being presented using exchange curated string
 	//   names which should be published to bidders a priori.
-	Type string `json:"type"`
+	Type MetricType `json:"type"`
 
 	// Attribute:
 	//   value
@@ -45,4 +49,18 @@ type Metric struct {
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
 	Ext json.RawMessage `json:"ext,omitempty"`
+}
+
+type MetricType string
+
+const (
+	MetricTypeViewability MetricType = "viewability"
+)
+
+var allMetricTypes = []MetricType{
+	MetricTypeViewability,
+}
+
+func (a *MetricType) IsValid() error {
+	return vld.EnumIsValid(a, allMetricTypes)
 }

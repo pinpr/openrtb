@@ -84,7 +84,7 @@ type Image struct {
 	//   Each implementing Exchange should have their own list of supported types in the integration docs.
 	//   See Wikipedia's MIME page for more information and links to all IETF RFCs.
 	//   If blank, assume all types are allowed.
-	MIMEs []string `json:"mimes,omitempty"`
+	MIMEs []native1.ImageMimeType `json:"mimes,omitempty"`
 
 	// Field:
 	//   ext

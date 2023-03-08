@@ -15,6 +15,7 @@ import (
 //
 // The lat/lon attributes should only be passed if they conform to the accuracy depicted in the type attribute.
 // For example, the centroid of a geographic region such as postal code should not be passed.
+
 type Geo struct {
 
 	// Attribute:
@@ -23,7 +24,7 @@ type Geo struct {
 	//   float
 	// Description:
 	//   Latitude from -90.0 to +90.0, where negative is south.
-	Lat float64 `json:"lat,omitempty"`
+	Lat float64 `json:"lat,omitempty" validate:"omitempty,latitude"`
 
 	// Attribute:
 	//   lon
@@ -31,7 +32,7 @@ type Geo struct {
 	//   float
 	// Description:
 	//   Longitude from -180.0 to +180.0, where negative is west.
-	Lon float64 `json:"lon,omitempty"`
+	Lon float64 `json:"lon,omitempty" validate:"omitempty,longitude"`
 
 	// Attribute:
 	//   type
@@ -81,7 +82,7 @@ type Geo struct {
 	//   string
 	// Description:
 	//   Country code using ISO-3166-1-alpha-3.
-	Country string `json:"country,omitempty"`
+	Country string `json:"country,omitempty" validate:"omitempty,iso3166_1_alpha3"`
 
 	// Attribute:
 	//   region
@@ -89,7 +90,7 @@ type Geo struct {
 	//   string
 	// Description:
 	//   Region code using ISO-3166-2; 2-letter state code if USA.
-	Region string `json:"region,omitempty"`
+	Region string `json:"region,omitempty" validate:"omitempty,iso3166_2"`
 
 	// Attribute:
 	//   regionfips104

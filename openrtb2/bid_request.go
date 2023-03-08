@@ -2,6 +2,7 @@ package openrtb2
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/prebid/openrtb/v18/adcom1"
 )
@@ -88,7 +89,7 @@ type BidRequest struct {
 	// Description:
 	//    Indicator of test mode in which auctions are not billable,
 	//    where 0 = live mode, 1 = test mode.
-	Test int8 `json:"test,omitempty"`
+	Test *int8 `json:"test,omitempty"`
 
 	// Attribute:
 	//   at
@@ -98,7 +99,7 @@ type BidRequest struct {
 	//    Auction type, where 1 = First Price, 2 = Second Price Plus.
 	//    Exchange-specific auction types can be defined using values
 	//    500 and greater.
-	AT int64 `json:"at,omitempty"`
+	AT AuctionType `json:"at,omitempty" type:"int"`
 
 	// Attribute:
 	//   tmax
@@ -108,7 +109,7 @@ type BidRequest struct {
 	//    Maximum time in milliseconds the exchange allows for bids to
 	//    be received including Internet latency to avoid timeout. This
 	//    value supersedes any a priori guidance from the exchange.
-	TMax int64 `json:"tmax,omitempty"`
+	TMax time.Duration `json:"tmax,omitempty"`
 
 	// Attribute:
 	//   wseat
@@ -146,7 +147,7 @@ type BidRequest struct {
 	//   (e.g., all on the web page, all video spots such as pre/mid/post
 	//   roll) to support road-blocking. 0 = no or unknown, 1 = yes, the
 	//   impressions offered represent all that are available.
-	AllImps int8 `json:"allimps,omitempty"`
+	AllImps *int8 `json:"allimps,omitempty"`
 
 	// Attribute:
 	//   cur

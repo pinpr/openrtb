@@ -113,7 +113,7 @@ type Request struct {
 	// Description:
 	//   0 for the first ad, 1 for the second ad, and so on.
 	//   Note this would generally NOT be used in combination with plcmtcnt - either you are auctioning multiple identical placements (in which case plcmtcnt>1, seq=0) or you are holding separate auctions for distinct items in the feed (in which case plcmtcnt=1, seq=>=1)
-	Seq int64 `json:"seq,omitempty"`
+	Seq *int64 `json:"seq,omitempty"`
 
 	// Field:
 	//   assets
@@ -137,7 +137,7 @@ type Request struct {
 	// Description:
 	//   Whether the supply source / impression supports returning an assetsurl instead of an asset object.
 	//   0 or the absence of the field indicates no such support.
-	AURLSupport int8 `json:"aurlsupport,omitempty"`
+	AURLSupport *int8 `json:"aurlsupport,omitempty"`
 
 	// Field:
 	//   durlsupport
@@ -151,7 +151,7 @@ type Request struct {
 	//   Whether the supply source / impression supports returning a dco url instead of an asset object.
 	//   0 or the absence of the field indicates no such support.
 	//   Beta feature.
-	DURLSupport int8 `json:"durlsupport,omitempty"`
+	DURLSupport *int8 `json:"durlsupport,omitempty"`
 
 	// Field:
 	//   eventtrackers
@@ -174,7 +174,7 @@ type Request struct {
 	// Description:
 	//   Set to 1 when the native1 ad supports buyer-specific privacy notice.
 	//   Set to 0 (or field absent) when the native1 ad doesn’t support custom privacy links or if support is unknown.
-	Privacy int8 `json:"privacy,omitempty"`
+	Privacy *int8 `json:"privacy,omitempty"`
 
 	// Field:
 	//   ext

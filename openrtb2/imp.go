@@ -1,6 +1,9 @@
 package openrtb2
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"time"
+)
 
 // 3.2.4 Object: Imp
 //
@@ -103,7 +106,7 @@ type Imp struct {
 	//   integer; default 0
 	// Description:
 	//   1 = the ad is interstitial or full screen, 0 = not interstitial.
-	Instl int8 `json:"instl,omitempty"`
+	Instl *int8 `json:"instl,omitempty"`
 
 	// Attribute:
 	//   tagid
@@ -142,7 +145,7 @@ type Imp struct {
 	//   creative in an app, where 0 = embedded, 1 = native. Note that
 	//   the Safari View Controller in iOS 9.x devices is considered a
 	//   native browser for purposes of this attribute.
-	ClickBrowser int8 `json:"clickbrowser,omitempty"`
+	ClickBrowser *int8 `json:"clickbrowser,omitempty"`
 
 	// Attribute:
 	//   secure
@@ -174,7 +177,7 @@ type Imp struct {
 	//   an extra life in a game, or get a sponsored ad-free music
 	//   session. The reward is typically distributed after the video ad is
 	//   completed.
-	Rwdd int8 `json:"rwdd,omitempty"`
+	Rwdd *int8 `json:"rwdd,omitempty"`
 
 	// Attribute:
 	//   ssai
@@ -188,7 +191,7 @@ type Imp struct {
 	//   1 = all client-side (i.e., not server-side),
 	//   2 = assets stitched server-side but tracking pixels fired client-side,
 	//   3 = all server-side.
-	SSAI AdInsertion `json:"ssai,omitempty"`
+	SSAI *AdInsertion `json:"ssai,omitempty"`
 
 	// Attribute:
 	//   exp
@@ -197,7 +200,7 @@ type Imp struct {
 	// Description:
 	//   Advisory as to the number of seconds that may elapse
 	//   between the auction and the actual impression.
-	Exp int64 `json:"exp,omitempty"`
+	Exp time.Duration `json:"exp,omitempty"`
 
 	// Attribute:
 	//   qty

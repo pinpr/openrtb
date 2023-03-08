@@ -10,17 +10,17 @@ import (
 //
 // This object provides information pertaining to the device through which the user is interacting.
 // Device information includes its hardware, platform, location, and carrier data.
-// The device can refer to a mobile handset, a desktop computer, set top box, or other digital device.
+// The device can refer to a mobile handset, a desktop computer, set-top box, or other digital device.
 //
 // BEST PRACTICE: There are currently no prominent open source lists for device makes, models, operating systems, or carriers.
 // Exchanges typically use commercial products or other proprietary lists for these attributes.
 // Until suitable open standards are available, exchanges are highly encouraged to publish lists of their device make, model, operating system, and carrier values to bidders.
 //
 // BEST PRACTICE: Proper device IP detection in mobile is not straightforward.
-// Typically it involves starting at the left of the x-forwarded-for header, skipping private carrier networks (e.g., 10.x.x.x or 192.x.x.x), and possibly scanning for known carrier IP ranges.
+// Typically, it involves starting at the left of the x-forwarded-for header, skipping private carrier networks (e.g., 10.x.x.x or 192.x.x.x), and possibly scanning for known carrier IP ranges.
 // Exchanges are urged to research and implement this feature carefully when presenting device IP values to bidders.
-type Device struct {
 
+type Device struct {
 	// Attribute:
 	//   geo
 	// Type:
@@ -37,7 +37,7 @@ type Device struct {
 	// Description:
 	//   Standard “Do Not Track” flag as set in the header by the
 	//   browser, where 0 = tracking is unrestricted, 1 = do not track.
-	DNT *int8 `json:"dnt,omitempty"`
+	DNT *int8 `json:"dnt,omitempty" validate:"omitempty,oneof=0 1"`
 
 	// Attribute:
 	//   lmt
@@ -47,7 +47,7 @@ type Device struct {
 	//   “Limit Ad Tracking” signal commercially endorsed (e.g., iOS,
 	//   Android), where 0 = tracking is unrestricted, 1 = tracking must
 	//   be limited per commercial guidelines.
-	Lmt *int8 `json:"lmt,omitempty"`
+	Lmt *int8 `json:"lmt,omitempty" validate:"omitempty,oneof=0 1"`
 
 	// Attribute:
 	//   ua
@@ -87,15 +87,15 @@ type Device struct {
 	//   string; recommended
 	// Description:
 	//   IPv4 address closest to device.
-	IP string `json:"ip,omitempty"`
+	IP string `json:"ip,omitempty" validate:"omitempty,ip"`
 
 	// Attribute:
 	//   ipv6
 	// Type:
 	//   string
 	// Description:
-	//   IP address closest to device as IPv6.
-	IPv6 string `json:"ipv6,omitempty"`
+	//   IP address closest to device as IPV6.
+	IPV6 string `json:"ipv6,omitempty"`
 
 	// Attribute:
 	//   devicetype
@@ -138,7 +138,7 @@ type Device struct {
 	//   string
 	// Description:
 	//   Device operating system version (e.g., “3.1.2”).
-	OSV string `json:"osv,omitempty"`
+	OSV string `json:"osv,omitempty" validate:"omitempty,semver"`
 
 	// Attribute:
 	//   hwv
@@ -186,7 +186,7 @@ type Device struct {
 	//   integer
 	// Description:
 	//   Support for JavaScript, where 0 = no, 1 = yes.
-	JS int8 `json:"js,omitempty"`
+	JS *int8 `json:"js,omitempty"`
 
 	// Attribute:
 	//   geofetch
@@ -195,7 +195,7 @@ type Device struct {
 	// Description:
 	//   Indicates if the geolocation API will be available to JavaScript
 	//   code running in the banner, where 0 = no, 1 = yes.
-	GeoFetch int8 `json:"geofetch,omitempty"`
+	GeoFetch *int8 `json:"geofetch,omitempty"`
 
 	// Attribute:
 	//   flashver
@@ -210,8 +210,8 @@ type Device struct {
 	// Type:
 	//   string
 	// Description:
-	//   Browser language using ISO-639-1-alpha-2. Only one of
-	//   language or langb should be present.
+	//   Browser language using ISO-639-1-alpha-2.
+	//   e.g. for the locale “zh-Hant-HK”, returns “zh”.
 	Language string `json:"language,omitempty"`
 
 	// Attribute:
@@ -220,8 +220,8 @@ type Device struct {
 	//   string
 	// Description:
 	//   Content language using IETF BCP 47. Only one of language or
-	//   langb should be present.
-	LangB string `json:"langb,omitempty"`
+	//   langb should be present. (e.g. "zh-HK" or “zh-Hant-HK”)
+	LangB string `json:"langb,omitempty" validate:"omitempty,bcp47_language_tag"`
 
 	// Attribute:
 	//   carrier
@@ -249,6 +249,9 @@ type Device struct {
 	//   other data signals.
 	MCCMNC string `json:"mccmnc,omitempty"`
 
+	// Carrier region code using ISO-3166-2; 2-letter state code if USA
+	CarrierRegion string `json:"carrierregion,omitempty" validate:"omitempty,iso3166_1_alpha2"`
+
 	// Attribute:
 	//   connectiontype
 	// Type:
@@ -269,58 +272,49 @@ type Device struct {
 	IFA string `json:"ifa,omitempty"`
 
 	// Attribute:
-	//   didsha1
-	// Type:
-	//   string; DEPRECATED
-	// Description:
-	//   Hardware device ID (e.g., IMEI); hashed via SHA1.
-	DIDSHA1 string `json:"didsha1,omitempty"`
-
-	// Attribute:
-	//   didmd5
-	// Type:
-	//   string; DEPRECATED
-	// Description:
-	//  Hardware device ID (e.g., IMEI); hashed via MD5.
-	DIDMD5 string `json:"didmd5,omitempty"`
-
-	// Attribute:
-	//   dpidsha1
-	// Type:
-	//   string; DEPRECATED
-	// Description:
-	//   Platform device ID (e.g., Android ID); hashed via SHA1.
-	DPIDSHA1 string `json:"dpidsha1,omitempty"`
-
-	// Attribute:
-	//   dpidmd5
-	// Type:
-	//   string; DEPRECATED
-	// Description:
-	//   Platform device ID (e.g., Android ID); hashed via MD5.
-	DPIDMD5 string `json:"dpidmd5,omitempty"`
-
-	// Attribute:
-	//   macsha1
-	// Type:
-	//   string; DEPRECATED
-	// Description:
-	//   MAC address of the device; hashed via SHA1.
-	MACSHA1 string `json:"macsha1,omitempty"`
-
-	// Attribute:
-	//   macmd5
-	// Type:
-	//   string; DEPRECATED
-	// Description:
-	//   MAC address of the device; hashed via MD5.
-	MACMD5 string `json:"macmd5,omitempty"`
-
-	// Attribute:
 	//   ext
 	// Type:
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
 	Ext json.RawMessage `json:"ext,omitempty"`
+
+	DeviceExtension
+}
+
+type DeviceExtension struct {
+	Identifier
+	DeviceInfo
+}
+
+type DeviceInfo struct {
+	// The device name (e.g. somebody's iPhone), hashed by MD5
+	Name string `json:"name,omitempty" validate:"omitempty,md5"`
+
+	// Hardware of the device (e.g., “iPhone13,1” for iPhone 12 mini)
+	HW string `json:"hw,omitempty"`
+
+	// Hardware model of the device (e.g., “D52gAP” for iPhone 12 mini)
+	HWM string `json:"hwm,omitempty"`
+
+	// The total amount of physical memory(RAM) in bytes
+	RAM uint64 `json:"ram,omitempty"`
+
+	// The total amount of disk space in bytes
+	Disk uint64 `json:"disk,omitempty"`
+
+	// The available amount of disk space in bytes
+	FreeDisk uint64 `json:"freedisk,omitempty"`
+
+	// System boot time of the device in seconds since last reboot (use `string` instead of `double` type for precision)
+	SysBootTime string `json:"sysboottime,omitempty"`
+
+	// System update time of the device in seconds (use `string` instead of `double` type for precision)
+	SysUptime string `json:"sysuptime,omitempty"`
+
+	// Region code using ISO-3166-1-alpha-2 (e.g. for the locale “zh-Hant-HK”, returns “HK”)
+	Region string `json:"region,omitempty" validate:"omitempty,iso3166_1_alpha2"`
+
+	// The current difference in seconds between the receiver and GMT (Greenwich Mean Time)
+	Timezone int32 `json:"timezone,omitempty"`
 }

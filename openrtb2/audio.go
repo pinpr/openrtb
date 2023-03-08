@@ -109,7 +109,7 @@ type Audio struct {
 	//   The sequence (position) of the audio ad pod within a
 	//   content stream. Refer to List: Pod Sequence in AdCOM 1.0
 	//   for guidance on the use of this field.
-	PodSeq adcom1.PodSequence `json:"podseq,omitempty"`
+	PodSeq *adcom1.PodSequence `json:"podseq,omitempty"`
 
 	// Attribute:
 	//   sequence
@@ -130,7 +130,7 @@ type Audio struct {
 	//   guarantee delivery against the indicated sequence. Refer to
 	//   List: Slot Position in Pod in AdCOM 1.0 for guidance on the
 	//   use of this field.
-	SlotInPod adcom1.SlotPositionInPod `json:"slotinpod,omitempty"`
+	SlotInPod *adcom1.SlotPositionInPod `json:"slotinpod,omitempty"`
 
 	// Attribute:
 	//   mincpmpersec
@@ -245,7 +245,7 @@ type Audio struct {
 	// Description:
 	//   Indicates if the ad is stitched with audio content or delivered
 	//   independently, where 0 = no, 1 = yes.
-	Stitched int8 `json:"stitched,omitempty"`
+	Stitched *int8 `json:"stitched,omitempty"`
 
 	// Attribute:
 	//   nvol

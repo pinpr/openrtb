@@ -2,6 +2,7 @@ package openrtb2
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/prebid/openrtb/v18/adcom1"
 )
@@ -309,7 +310,7 @@ type Bid struct {
 	// Description:
 	//   Advisory as to the number of seconds the bidder is willing to
 	//   wait between the auction and the actual impression.
-	Exp int64 `json:"exp,omitempty"`
+	Exp time.Duration `json:"exp,omitempty"`
 
 	// Attribute:
 	//   dur

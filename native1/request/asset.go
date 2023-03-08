@@ -28,8 +28,8 @@ type Asset struct {
 	//   int
 	// Description:
 	//   Unique asset ID, assigned by exchange.
-	//   Typically a counter for the array.
-	ID int64 `json:"id"`
+	//   Typically a counter for the array. (Some DSPs don't support int64)
+	ID int32 `json:"id"`
 
 	// Field:
 	//   required

@@ -2,6 +2,8 @@ package openrtb2
 
 import (
 	"encoding/json"
+	"github.com/prebid/openrtb/v18/native1"
+	"time"
 
 	"github.com/prebid/openrtb/v18/adcom1"
 )
@@ -25,7 +27,7 @@ type Video struct {
 	// Description:
 	//   Content MIME types supported (e.g., “video/x-ms-wmv”,
 	//   “video/mp4”).
-	MIMEs []string `json:"mimes"`
+	MIMEs []native1.VideoMimeType `json:"mimes"`
 
 	// Attribute:
 	//   minduration
@@ -35,7 +37,7 @@ type Video struct {
 	//   Minimum video ad duration in seconds. This field is mutually
 	//   exclusive with rqddurs; only one of minduration and rqddurs
 	//   may be in a bid request.
-	MinDuration int64 `json:"minduration,omitempty"`
+	MinDuration time.Duration `json:"minduration,omitempty"`
 
 	// Attribute:
 	//   maxduration
@@ -45,7 +47,7 @@ type Video struct {
 	//  Maximum video ad duration in seconds. This field is mutually
 	//  exclusive with rqddurs; only one of maxduration and rqddurs
 	//  may be in a bid request.
-	MaxDuration int64 `json:"maxduration,omitempty"`
+	MaxDuration time.Duration `json:"maxduration,omitempty"`
 
 	// Attribute:
 	//   startdelay
@@ -132,7 +134,7 @@ type Video struct {
 	//   within a bid request share the same podid, this indicates that
 	//   those impression opportunities belong to the same video ad
 	//   pod.
-	PodID string `json:"podid,omitempty"`
+	PodID int64 `json:"podid,omitempty"`
 
 	// Attribute:
 	//   podseq
@@ -142,7 +144,7 @@ type Video struct {
 	//   The sequence (position) of the video ad pod within a
 	//  content stream. Refer to List: Pod Sequence in AdCOM 1.0
 	//  for guidance on the use of this field.
-	PodSeq adcom1.PodSequence `json:"podseq,omitempty"`
+	PodSeq *adcom1.PodSequence `json:"podseq,omitempty"`
 
 	// Attribute:
 	//   rqddurs
@@ -198,7 +200,7 @@ type Video struct {
 	// Description:
 	//   Videos of total duration greater than this number of seconds
 	//   can be skippable; only applicable if the ad is skippable.
-	SkipMin int64 `json:"skipmin,omitempty"`
+	SkipMin time.Duration `json:"skipmin,omitempty"`
 
 	// Attribute:
 	//   skipafter
@@ -228,7 +230,7 @@ type Video struct {
 	//   guarantee delivery against the indicated slot position in the
 	//   pod. Refer to  List: Slot Position in Pod in AdCOM 1.0 guidance
 	//   on the use of this field.
-	SlotInPod adcom1.SlotPositionInPod `json:"slotinpod,omitempty"`
+	SlotInPod *adcom1.SlotPositionInPod `json:"slotinpod,omitempty"`
 
 	// Attribute:
 	//   mincpmpersec
@@ -286,7 +288,7 @@ type Video struct {
 	// Description:
 	//   Indicates if letter-boxing of 4:3 content into a 16:9 window is
 	//   allowed, where 0 = no, 1 = yes.
-	BoxingAllowed int8 `json:"boxingallowed,omitempty"`
+	BoxingAllowed *int8 `json:"boxingallowed,omitempty"`
 
 	// Attribute:
 	//   playbackmethod
