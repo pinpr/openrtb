@@ -2,6 +2,7 @@ package native1
 
 import (
 	"database/sql/driver"
+
 	"github.com/pinpr/backend-shared-kit/sql"
 	"github.com/pinpr/backend-shared-kit/vld"
 )
@@ -12,9 +13,12 @@ type (
 )
 
 const (
-	ContentTypeText  ContentType = "text"
-	ContentTypeImage ContentType = "image"
-	ContentTypeVideo ContentType = "video"
+	ContentTypeText     ContentType = "text"
+	ContentTypeImage    ContentType = "image"
+	ContentTypeVideo    ContentType = "video"
+	ContentTypeSubtitle ContentType = "subtitle"
+	ContentTypeRating   ContentType = "rating"
+	ContentTypeIcon     ContentType = "icon"
 )
 
 var (
@@ -22,6 +26,9 @@ var (
 		ContentTypeText,
 		ContentTypeImage,
 		ContentTypeVideo,
+		ContentTypeSubtitle,
+		ContentTypeRating,
+		ContentTypeIcon,
 	}
 )
 
