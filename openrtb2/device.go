@@ -272,6 +272,22 @@ type Device struct {
 	IFA string `json:"ifa,omitempty"`
 
 	// Attribute:
+	//   dpidsha1
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   Platform device ID (e.g., Android ID); hashed via SHA1.
+	DpidSha1 string `json:"dpidsha1,omitempty"`
+
+	// Attribute:
+	//   dpidmd5
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   Platform device ID (e.g., Android ID); hashed via MD5.
+	DpidMd5 string `json:"dpidmd5,omitempty"`
+
+	// Attribute:
 	//   ext
 	// Type:
 	//   object
