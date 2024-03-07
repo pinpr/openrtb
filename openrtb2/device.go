@@ -272,6 +272,54 @@ type Device struct {
 	IFA string `json:"ifa,omitempty"`
 
 	// Attribute:
+	//   didsha1
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   Hardware device ID (e.g., Android ID); hashed via SHA1.
+	DidSha1 string `json:"didsha1,omitempty"`
+
+	// Attribute:
+	//   didmd5
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   Hardware device ID (e.g., Android ID); hashed via MD5.
+	DidMd5 string `json:"didmd5,omitempty"`
+
+	// Attribute:
+	//   dpidsha1
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   Platform device ID (e.g., Android ID); hashed via SHA1.
+	DpidSha1 string `json:"dpidsha1,omitempty"`
+
+	// Attribute:
+	//   dpidmd5
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   Platform device ID (e.g., Android ID); hashed via MD5.
+	DpidMd5 string `json:"dpidmd5,omitempty"`
+
+	// Attribute:
+	//   macsha1
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   MAC address of the device; hashed via SHA1.
+	MacSha1 string `json:"macsha1,omitempty"`
+
+	// Attribute:
+	//   macmd5
+	// Type:
+	//   string(DEPRECATED)
+	// Description:
+	//   MAC address of the device; hashed via SHA1.
+	MacMd5 string `json:"macmd5,omitempty"`
+
+	// Attribute:
 	//   ext
 	// Type:
 	//   object
